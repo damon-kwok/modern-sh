@@ -107,12 +107,6 @@
 
 (defconst modern-sh-font-lock-keywords
   `(
-     ;; delimiter: path
-     ("\\(/\\)" . 'font-lock-preprocessor-face)
-     ;; path
-     ("/\\([A-Za-z0-9_\\.\\-]+\\)" 1 'font-lock-negation-char-face)
-     ("\\([A-Za-z0-9_\\.\\-]+\\)/" 1 'font-lock-negation-char-face)
-
      ;; careful
      (,modern-sh-careful-keywords-regexp . font-lock-warning-face)
 
@@ -123,8 +117,14 @@
      ("\\([.]*[A-Za-z0-9_-]+\\)|" 1 'font-lock-builtin-face)
 
      ;; env variable
-     ("[$&]\\([A-Za-z0-9_#?*]+\\)" . 'font-lock-warning-face)
-     ("${\\([A-Za-z0-9_#]+\\)" 1 'font-lock-warning-face)
+     ("[$&]\\([A-Za-z0-9_-]+\\)" . 'font-lock-warning-face)
+     ("${\\([A-Za-z0-9_-]+\\)" 1 'font-lock-warning-face)
+
+     ;; delimiter: path
+     ("\\(/\\)" . 'font-lock-preprocessor-face)
+     ;; path
+     ("/\\([A-Za-z0-9_-]+\\)" 1 'font-lock-negation-char-face)
+     ("\\([A-Za-z0-9_-]+\\)/" 1 'font-lock-negation-char-face)
 
      ;; variable define
      ("\\([A-Za-z_][A-Za-z0-9_-]*\\)[ \t]*[=[]" 1 'font-lock-variable-name-face)
@@ -148,7 +148,7 @@
      (,modern-sh-constant-regexp . font-lock-constant-face)
 
      ;; function
-     ("\\(?:function\s+\\)*\\([A-Za-z_][A-Za-z0-9_-]*\\)[ \t]*(" 1
+     ("\\(?:function\s+\\)*\\([A-Za-z_][A-Za-z0-9_\\-]*\\)[ \t]*(" 1
        'font-lock-function-name-face)
 
      ;; command
