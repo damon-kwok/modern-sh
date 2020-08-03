@@ -109,10 +109,12 @@
 
      ;; command options
      ;; ("^[ \t]*\\([A-Za-z0-9_-]+\\)[ \t]+\\([+-]+[A-Za-z0-9_-]*\\)[= \t]*" 2 'font-lock-builtin-face)
-     ("[ \t]\\([+-]+[A-Za-z0-9_-]*\\)[= \t]*" 1 'font-lock-builtin-face)
+     ("[ \t:|]\\([+-]+[A-Za-z0-9_-]*\\)[= \t]*" 1 'font-lock-builtin-face)
+     ("|\\([.]*[A-Za-z0-9_-]+\\)" 1 'font-lock-builtin-face)
+     ("\\([.]*[A-Za-z0-9_-]+\\)|" 1 'font-lock-builtin-face)
 
      ;; env variable
-     ("$\\([A-Za-z0-9_#/?/*]+\\)" . 'font-lock-warning-face)
+     ("[$&]\\([A-Za-z0-9_#/?/*]+\\)" . 'font-lock-warning-face)
      ("${\\([A-Za-z0-9_#]+\\)" 1 'font-lock-warning-face)
 
      ;; variable define
@@ -152,7 +154,7 @@
        'font-lock-constant-face)
 
      ;;
-     ("\\(\\$\\*\\|\\$\\?\\)" . 'font-lock-warning-face)
+     ("\\(++\\|--\\|\\.\\.\\.\\|\\^\\*\\|\\*\\^|\\|\\$\\*\\|\\$\\?\\)" . 'font-lock-warning-face)
      ("\\([*|`@#/?]+\\)" . 'font-lock-warning-face)
 
      ;; delimiter: path
@@ -172,8 +174,8 @@
      ("\\([,;]+\\)" 1 'font-lock-comment-delimiter-face)
 
      ;; delimiter: operator symbols
-     ("\\([%~<>/?!&$|`^+-/*///.]+\\)" 1 'font-lock-warning-face)
-     ("\\([=]+\\)" 1 'font-lock-negation-char-face)
+     ("\\([%~/?!&$|`/^/*///.]+\\)" 1 'font-lock-warning-face)
+     ("\\([=<>]+\\)" 1 'font-lock-negation-char-face)
 
      ;; delimiter: = : separate
      ("[^%~^!=<>+-*/]\\([=:]\\)[^%~^!=<>+-*/]" 1
