@@ -29,10 +29,7 @@
 
 (defvar modern-sh-mode-hook nil)
 
-(defvar modern-sh-mode-map
-  (let ((map (make-keymap)))
-    ;; (define-key map (kbd "<f6>")  'modern-sh-menu) ;
-    map)
+(defvar modern-sh-mode-map (let ((map (make-keymap))) map)
   "Keymap for Modern shell minor mode.")
 
 (defconst modern-sh-keywords
@@ -49,9 +46,10 @@
   '("source" "sh" "bash" "zsh" "csh" "ksh" "fish" "pwsh")
   "Modern shell preprocessor keywords.")
 
-(defconst modern-sh-careful-keywords ;;
-  '("export"                         ;
-     "return" "break" "continue" ;
+(defconst modern-sh-careful-keywords
+  ;;
+  '("export"                            ;
+     "return" "break" "continue"        ;
      "shift" "pushd" "popd")
   "Modern shell language careful keywords.")
 
@@ -154,7 +152,8 @@
        'font-lock-constant-face)
 
      ;;
-     ("\\(++\\|--\\|\\.\\.\\.\\|\\^\\*\\|\\*\\^|\\|\\$\\*\\|\\$\\?\\)" . 'font-lock-warning-face)
+     ("\\(++\\|--\\|\\.\\.\\.\\|\\^\\*\\|\\*\\^|\\|\\$\\*\\|\\$\\?\\)" .
+       'font-lock-warning-face)
      ("\\([*|`@#/?]+\\)" . 'font-lock-warning-face)
 
      ;; delimiter: path
