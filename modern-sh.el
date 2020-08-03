@@ -118,17 +118,26 @@
      ("^[ \t]*\\([.]*[A-Za-z0-9_-]+\\)[ \t]*)" 1 'font-lock-builtin-face)
 
      ;; env variable
-     ("[$&]\\([A-Za-z0-9_-]+\\)" . 'font-lock-warning-face)
+     ("[$&]\\([A-Za-z0-9_-]+\\)" 1 'font-lock-warning-face)
      ("${\\([A-Za-z0-9_-]+\\)" 1 'font-lock-warning-face)
 
      ;; delimiter: path
      ("\\(/\\)" . 'font-lock-preprocessor-face)
+
      ;; path
-     ("/\\([A-Za-z0-9_-]+\\)" 1 'font-lock-negation-char-face)
-     ("\\([A-Za-z0-9_-]+\\)/" 1 'font-lock-negation-char-face)
+     ;; ("/\\(\w+\\)" 1 'font-lock-negation-char-face)
+     ;; ("\\(\w+\\)/" 1 'font-lock-negation-char-face)
+     ;; [A-Za-z_.]
+     ("/\\([A-Za-z0-9_.-]*\\)" 1 'font-lock-negation-char-face)
+     ("\\([A-Za-z0-9_.-]*\\)/" 1 'font-lock-negation-char-face)
+
+     ;;
+     ("\\(++\\|--\\|\\.\\.\\.\\|\\^\\*\\|\\*\\^|\\|\\$\\*\\|\\$\\?\\)" .
+       'font-lock-warning-face)
+     ("\\([*|`@#?]+\\)" . 'font-lock-warning-face)
 
      ;; variable define
-     ("\\([A-Za-z_][A-Za-z0-9_-]*\\)[ \t]*[=[]" 1 'font-lock-variable-name-face)
+     ("\\([A-Za-z_.-][A-Za-z0-9_.-]*\\)[ \t]*[=[]" 1 'font-lock-variable-name-face)
 
      ;; builtin
      (,modern-sh-builtin-keywords-regexp . font-lock-warning-face)
@@ -149,24 +158,19 @@
      (,modern-sh-constant-regexp . font-lock-constant-face)
 
      ;; function
-     ("\\(?:function\s+\\)*\\([A-Za-z_][A-Za-z0-9_\\-]*\\)[ \t]*(" 1
+     ("\\(?:function\s+\\)*\\([A-Za-z_.-][A-Za-z0-9_.-]*\\)[ \t]*(" 1
        'font-lock-function-name-face)
 
      ;; command
-     ("^[ \t]*\\([A-Za-z_]+[A-Za-z0-9_-]+\\)[ \t]*" 1
+     ("^[ \t]*\\([A-Za-z_.-]+[A-Za-z0-9_.-]+\\)[ \t]*" 1
        'font-lock-function-name-face)
 
      ;; variable refs
-     ("\\([A-Za-z_-][A-Za-z0-9_-?*]*\\)" . 'font-lock-variable-name-face)
+     ("\\([A-Za-z_.-][A-Za-z0-9_.-]*\\)" . 'font-lock-variable-name-face)
 
      ;; numeric literals
-     ("[ \t=><([,;$+-*|]\\([0-9][0-9a-zA-Z_-]*\\)+" 1
+     ("[ \t=><([,;$+-*|]\\([0-9][0-9a-zA-Z_.-]*\\)+" 1
        'font-lock-constant-face)
-
-     ;;
-     ("\\(++\\|--\\|\\.\\.\\.\\|\\^\\*\\|\\*\\^|\\|\\$\\*\\|\\$\\?\\)" .
-       'font-lock-warning-face)
-     ("\\([*|`@#/?]+\\)" . 'font-lock-warning-face)
 
      ;; type
      ;; ("\\([A-Z][A-Za-z0-9_]*\\)" 1 'font-lock-type-face)
@@ -178,7 +182,7 @@
      ("\\([,;]+\\)" 1 'font-lock-comment-delimiter-face)
 
      ;; delimiter: operator symbols
-     ("\\([%~/?!&$|`/^/*///.]+\\)" 1 'font-lock-warning-face)
+     ("\\([%~/?!&$|`/^/*//]+\\)" 1 'font-lock-warning-face)
      ("\\([=<>]+\\)" 1 'font-lock-negation-char-face)
 
      ;; delimiter: = : separate
