@@ -14,9 +14,9 @@ An Emacs minor mode for editing shell script.
 ## Features
 
 - [X] Modern syntax highlighting
-- [ ] Auto format on save
-- [ ] Code navigation (using `imenu`)
-- [ ] Go to definition (using `ctags`)
+- [x] Auto format on save
+- [x] Code navigation (using `imenu`)
+- [x] Go to definition (using `ctags`)
 <!-- - [ ] Code completion (using `company-mode`) -->
 <!-- - [ ] Indentation -->
 <!-- - [x] TODO highlighting -->
