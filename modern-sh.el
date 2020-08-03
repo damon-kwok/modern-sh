@@ -4,7 +4,7 @@
 ;; Version: 0.0.1
 ;; URL: https://github.com/damon-kwok/modern-sh
 ;; Keywords: languages programming
-;; Package-Requires: ((emacs "24.3"))
+;; Package-Requires: ((emacs "24.3") (hydra "0.15.0"))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -26,6 +26,11 @@
 ;;   M-x package-install modern-sh
 ;;
 ;;; Code:
+
+(require 'cl-lib)
+(require 'xref)
+(require 'hydra)
+(require 'imenu)
 
 (defvar modern-sh-mode-hook nil)
 
