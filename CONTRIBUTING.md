@@ -1,11 +1,11 @@
-# Contributing to verona-mode
+# Contributing to modern-sh
 
-Hi there! Thanks for your interest in contributing to `verona-mode`.
+Hi there! Thanks for your interest in contributing to `modern-sh`.
 
-Please note, that by submitting changes to `verona-mode`, you are agreeing that
-it can be licensed under our license as seen in `verona-mode.el`. Furthermore,
+Please note, that by submitting changes to `modern-sh`, you are agreeing that
+it can be licensed under our license as seen in `modern-sh.el`. Furthermore,
 you are testifying that you own the copyright to the submitted changes and
-indemnify `verona-mode` from any copyright claim that might result from your not
+indemnify `modern-sh` from any copyright claim that might result from your not
 being the authorized copyright holder.
 
 ## Code formatting basics
