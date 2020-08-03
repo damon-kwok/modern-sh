@@ -233,11 +233,10 @@ Optional argument PATH: project path."
   (compile command))
 
 (defun modern-sh-project-build ()
-  "Build project with bashc."
+  "Build project."
   (interactive)
   (if (modern-sh-project-file-exists-p "Makefile")
-    (modern-sh-run-command "make")
-    (modern-sh-run-command "bashc .")))
+    (modern-sh-run-command "make")))
 
 (defun modern-sh-project-open ()
   "Open `Makefile' file."
