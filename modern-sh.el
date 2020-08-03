@@ -59,10 +59,8 @@
   "Modern shell language careful keywords.")
 
 (defconst modern-sh-builtin-keywords
-  '(                                    ;
-     ;; "cd" "tput" "setaf" "sgr0"
-     "su" "sudo" "chroot" "exit"        ;
-     "kill" "pkill" "rm"                ;
+  '("su" "sudo" "chroot" "exit" "rm"    ;
+     "kill" "pkill" "skill" "killall"   ;
      "passwd" "chmod" "sleep" "read")
   "Modern shell language keywords.")
 
