@@ -53,7 +53,7 @@
 
 (defconst modern-sh-careful-keywords
   ;;
-  '("export"                            ;
+  '("export" "eval" "unset"             ;
      "return" "break" "continue"        ;
      "shift" "pushd" "popd")
   "Modern shell language careful keywords.")
@@ -61,7 +61,9 @@
 (defconst modern-sh-builtin-keywords
   '(                                    ;
      ;; "cd" "tput" "setaf" "sgr0"
-     "sudo" "exit" "passwd" "sleep" "kill" "read")
+     "su" "sudo" "chroot" "exit"        ;
+     "kill" "pkill" "rm"                ;
+     "passwd" "chmod" "sleep" "read")
   "Modern shell language keywords.")
 
 (defconst modern-sh-constants
@@ -137,7 +139,8 @@
      ("\\([*|`@#?]+\\)" . 'font-lock-warning-face)
 
      ;; variable define
-     ("\\([A-Za-z_.-][A-Za-z0-9_.-]*\\)[ \t]*[=[]" 1 'font-lock-variable-name-face)
+     ("\\([A-Za-z_.-][A-Za-z0-9_.-]*\\)[ \t]*[=[]" 1
+       'font-lock-variable-name-face)
 
      ;; builtin
      (,modern-sh-builtin-keywords-regexp . font-lock-warning-face)
@@ -169,8 +172,7 @@
      ("\\([A-Za-z_.-][A-Za-z0-9_.-]*\\)" . 'font-lock-variable-name-face)
 
      ;; numeric literals
-     ("[ \t=><([,;$+-*|]\\([0-9][0-9a-zA-Z_.-]*\\)+" 1
-       'font-lock-constant-face)
+     ("[ \t=><([,;$+-*|]\\([0-9][0-9a-zA-Z_.-]*\\)+" 1 'font-lock-constant-face)
 
      ;; type
      ;; ("\\([A-Z][A-Za-z0-9_]*\\)" 1 'font-lock-type-face)
