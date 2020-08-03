@@ -109,6 +109,10 @@
   `(
      ;; delimiter: path
      ("\\(/\\)" . 'font-lock-preprocessor-face)
+     ;; path
+     ("/\\([A-Za-z0-9_\\.\\-]+\\)" 1 'font-lock-negation-char-face)
+     ("\\([A-Za-z0-9_\\.\\-]+\\)/" 1 'font-lock-negation-char-face)
+
      ;; careful
      (,modern-sh-careful-keywords-regexp . font-lock-warning-face)
 
@@ -150,10 +154,6 @@
      ;; command
      ("^[ \t]*\\([A-Za-z_]+[A-Za-z0-9_-]+\\)[ \t]*" 1
        'font-lock-function-name-face)
-
-     ;; path
-     ("/\\([.]*[A-Za-z0-9_-]+\\)" 1 'font-lock-negation-char-face)
-     ("\\([.]*[A-Za-z0-9_-]+\\)/" 1 'font-lock-negation-char-face)
 
      ;; variable refs
      ("\\([A-Za-z_-][A-Za-z0-9_-?*]*\\)" . 'font-lock-variable-name-face)
