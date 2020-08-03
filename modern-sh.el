@@ -92,14 +92,15 @@
 (defconst modern-sh-font-lock-keywords
   `(
      ;;
-     ("\\([*|`$@#?]+\\)" . 'font-lock-warning-face)
+     ("\\(\\$\\*\\|\\$\\?\\)" . 'font-lock-warning-face)
+     ("\\([*|`@#/?]+\\)" . 'font-lock-warning-face)
 
      ;; delimiter: path
      ("\\([/]\\)" . 'font-lock-keyword-face)
 
      ;; refs
-     ("$\\([A-Za-z0-9_*]+\\)" . 'font-lock-warning-face)
-     ("${\\([A-Za-z0-9_*]+\\)}" 1 'font-lock-warning-face)
+     ("$\\([A-Za-z0-9_/?/*]+\\)" . 'font-lock-warning-face)
+     ("${\\([A-Za-z0-9_]+\\)" 1 'font-lock-warning-face)
 
      ;; path
      ("/\\([.]*[A-Za-z0-9_-]+\\)" 1 'font-lock-string-face)
@@ -145,7 +146,7 @@
        'font-lock-constant-face)
 
      ;; variable references
-     ("\\([A-Za-z_.][A-Za-z0-9_-]*\\)" 1 'font-lock-variable-name-face)
+     ("\\([A-Za-z_][A-Za-z0-9_]*\\)" 1 'font-lock-variable-name-face)
 
      ;; delimiter: modifier
      ("\\(->\\|=>\\|\\.>\\|:>\\|:=\\|\\.\\.\\)" 1 'font-lock-keyword-face)
