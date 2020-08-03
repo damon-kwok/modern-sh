@@ -29,7 +29,7 @@ An Emacs minor mode for editing shell script.
 
 ## Installation
 
-### ~~Using MELPA~~ ([COMING SOON](https://github.com/melpa/melpa/pull/7034))
+### ~~Using MELPA~~ ([COMING SOON](https://github.com/melpa/melpa/pull/7056))
 This package can be obtain from
 [MELPA](http://melpa.org/#/modern-sh) or
 [MELPA Stable](http://stable.melpa.org/#/modern-sh). The `master`
