@@ -115,6 +115,7 @@
      ("[ \t:|]\\([+-]+[A-Za-z0-9_-]*\\)[ \t=]*" 1 'font-lock-builtin-face)
      ("|\\([.]*[A-Za-z0-9_-]+\\)" 1 'font-lock-builtin-face)
      ("\\([.]*[A-Za-z0-9_-]+\\)|" 1 'font-lock-builtin-face)
+     ("^[ \t]*\\([.]*[A-Za-z0-9_-]+\\)[ \t]*)" 1 'font-lock-builtin-face)
 
      ;; env variable
      ("[$&]\\([A-Za-z0-9_-]+\\)" . 'font-lock-warning-face)
