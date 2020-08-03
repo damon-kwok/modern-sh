@@ -40,5 +40,6 @@ deployed to `MELPA Stable`.
 
 ```elisp
 (require 'modern-sh)
+(define-key modern-sh-mode-map (kbd "<f6>")  'modern-sh-menu)
 (add-hook 'sh-mode-hook #'modern-sh-mode)
 ```
