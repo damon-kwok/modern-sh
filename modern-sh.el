@@ -332,16 +332,15 @@ Optional argument BUILD If the tags file does not exist, execute the build."
 (defun modern-sh-after-save-hook ()
   "After save hook."
   (when (eq major-mode 'sh-mode)
-    (shell-command (concat  "bashc fmt " (buffer-file-name)))
-    (revert-buffer
-      :ignore-auto
-      :noconfirm)
+    (indent-region (point-min)
+      (point-max))
     (if (not (executable-find "ctags"))
       (message "Could not locate executable '%s'" "ctags")
       (modern-sh-build-tags))))
 
 ;;;###autoload
-(define-minor-mode modern-sh-mode "Minor mode for editing shell script."
+(define-minor-mode modern-sh-mode ;;
+  "Minor mode for editing shell script."
   :init-value nil
   :lighter " modern-sh"
   :group 'modern-sh
