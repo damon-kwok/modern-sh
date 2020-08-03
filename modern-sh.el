@@ -107,7 +107,7 @@
 
      ;; command options
      ;; ("^[ \t]*\\([A-Za-z0-9_-]+\\)[ \t]+\\([+-]+[A-Za-z0-9_-]*\\)[= \t]*" 2 'font-lock-builtin-face)
-     ("[ \t:|]\\([+-]+[A-Za-z0-9_-]*\\)[= \t]*" 1 'font-lock-builtin-face)
+     ("[ \t:|]\\([+-]+[A-Za-z0-9_-]*\\)[ \t=]*" 1 'font-lock-builtin-face)
      ("|\\([.]*[A-Za-z0-9_-]+\\)" 1 'font-lock-builtin-face)
      ("\\([.]*[A-Za-z0-9_-]+\\)|" 1 'font-lock-builtin-face)
 
@@ -116,7 +116,7 @@
      ("${\\([A-Za-z0-9_#]+\\)" 1 'font-lock-warning-face)
 
      ;; variable define
-     ("\\([A-Za-z_][A-Za-z0-9_-]*\\)[ \t]*=" 1 'font-lock-variable-name-face)
+     ("\\([A-Za-z_][A-Za-z0-9_-]*\\)[ \t]*[=[]" 1 'font-lock-variable-name-face)
 
      ;; builtin
      (,modern-sh-builtin-keywords-regexp . font-lock-warning-face)
