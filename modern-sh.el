@@ -53,7 +53,7 @@
 
 (defconst modern-sh-careful-keywords
   ;;
-  '("export" "eval" "unset"             ;
+  '("export" "eval" "set" "unset"       ;
      "return" "break" "continue"        ;
      "shift" "pushd" "popd")
   "Modern shell language careful keywords.")
