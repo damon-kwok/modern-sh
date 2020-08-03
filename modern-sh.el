@@ -124,12 +124,9 @@
      ("${\\([A-Za-z0-9_-]+\\)" 1 'font-lock-warning-face)
 
      ;; delimiter: path
-     ("\\(/\\)" . 'font-lock-preprocessor-face)
+     ("\\(/\\)" . 'font-lock-doc-face)
 
      ;; path
-     ;; ("/\\(\w+\\)" 1 'font-lock-negation-char-face)
-     ;; ("\\(\w+\\)/" 1 'font-lock-negation-char-face)
-     ;; [A-Za-z_.]
      ("/\\([A-Za-z0-9_.-]*\\)" 1 'font-lock-negation-char-face)
      ("\\([A-Za-z0-9_.-]*\\)/" 1 'font-lock-negation-char-face)
 
