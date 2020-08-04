@@ -65,7 +65,7 @@
   "Modern shell language keywords.")
 
 (defconst modern-sh-constants
-  '("true" "false"           ;
+  '("true" "false" "test"    ;
      ;; "https" "http" "tcp" "udp" "ws" "telnet"       ;
      "HOME" "EDITOR" "ED"                           ;
      "PATH" "MANPATH" "INFOPATH"                    ;
