@@ -177,7 +177,7 @@
      ("\\([A-Za-z_]+[A-Za-z0-9_]*\\)" . 'font-lock-variable-name-face)
 
      ;; negation-char literals
-     ("\\(\\\\[A-Za-z0-9\"'`$&@#_=*+/-]*\\)" . 'font-lock-negation-char-face)
+     ("\\(\\\\[A-Za-z0-9\"'`$@#_=*+/-]*\\)" . 'font-lock-negation-char-face)
 
      ;; numeric literals
      ("\\([0-9]+[0-9a-zA-Z_.+-]*\\)+" 1 'font-lock-constant-face)
@@ -186,7 +186,7 @@
      ("\\([,;:]+\\)" 1 'font-lock-comment-delimiter-face)
 
      ;; delimiter: operator symbols
-     ("\\([>=<~|]+\\)" 1 'font-lock-keyword-face)
+     ("\\([>=<~|&]+\\)" 1 'font-lock-keyword-face)
      ("\\([$&*`@#?%&!^*/]+\\)" 1 'font-lock-warning-face)
 
      ;; delimiter: brackets
