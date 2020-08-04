@@ -65,8 +65,7 @@
   "Modern shell language keywords.")
 
 (defconst modern-sh-constants
-  '("true" "false" "test"    ;
-     ;; "https" "http" "tcp" "udp" "ws" "telnet"       ;
+  '("true" "false" "test"                           ;
      "HOME" "EDITOR" "ED"                           ;
      "PATH" "MANPATH" "INFOPATH"                    ;
      "LIBRARY_PATH" "LD_LIBRARY_PATH" "LD_RUN_PATH" ;
@@ -187,7 +186,7 @@
 
      ;; delimiter: operator symbols
      ("\\([>=<~|&]+\\)" 1 'font-lock-keyword-face)
-     ("\\([$&*`@#?%&!^*/]+\\)" 1 'font-lock-warning-face)
+     ("\\([$&*`@#?%&!^*/-]+\\)" 1 'font-lock-warning-face)
 
      ;; delimiter: brackets
      ("\\(\\[\\|\\]\\|[(){}]\\)" 1 'font-lock-comment-delimiter-face))
