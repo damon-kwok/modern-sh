@@ -65,7 +65,8 @@
   "Modern shell language keywords.")
 
 (defconst modern-sh-constants
-  '("true" "false"                                  ;
+  '("true" "false"           ;
+     ;; "https" "http" "tcp" "udp" "ws" "telnet"       ;
      "HOME" "EDITOR" "ED"                           ;
      "PATH" "MANPATH" "INFOPATH"                    ;
      "LIBRARY_PATH" "LD_LIBRARY_PATH" "LD_RUN_PATH" ;
@@ -107,84 +108,86 @@
 
 (defconst modern-sh-font-lock-keywords
   `(
+     ;; wrap
+     ("\\([ \t]*\\\\$\\)" . 'font-lock-warning-face)
+
+     ;; source
+     ("^[ \t]*\\(\\.\\)[ \t\n]" 1 'font-lock-warning-face)
+
      ;; careful
      (,modern-sh-careful-keywords-regexp . font-lock-warning-face)
 
-     ;; command options
-     ;; ("^[ \t]*\\([A-Za-z0-9_-]+\\)[ \t]+\\([+-]+[A-Za-z0-9_-]*\\)[= \t]*" 2 'font-lock-builtin-face)
-     ("[ \t:|]\\([+-]+[A-Za-z0-9_-]*\\)[ \t=]*" 1 'font-lock-builtin-face)
-     ("|\\([.]*[A-Za-z0-9_-]+\\)" 1 'font-lock-builtin-face)
-     ("\\([.]*[A-Za-z0-9_-]+\\)|" 1 'font-lock-builtin-face)
-     ("^[ \t]*\\([.]*[A-Za-z0-9_-]+\\)[ \t]*)" 1 'font-lock-builtin-face)
-
      ;; env variable
-     ("[$&]\\([A-Za-z0-9_-]+\\)" 1 'font-lock-warning-face)
-     ("${\\([A-Za-z0-9_-]+\\)" 1 'font-lock-warning-face)
+     ("[$&]+\\([A-Za-z0-9_#@.-]+\\)" . 'font-lock-warning-face)
+     ("${\\([A-Za-z0-9_#@-]+\\)" 1 'font-lock-warning-face)
+
+     ;; command options
+     ("^[ \t]*\\([A-Za-z_.-][A-Za-z0-9_.=@?#*/+-]+\\)[ \t]*)" 1
+       'font-lock-negation-char-face)
+     ("[ \t]\\([+-]+[A-Za-z0-9_]+\\)" 1 'font-lock-builtin-face)
+     ("|\\([A-Za-z_.-][A-Za-z0-9_]+\\)" 1 'font-lock-builtin-face)
+     ("\\([A-Za-z_.-][A-Za-z0-9_]+\\)|" 1 'font-lock-builtin-face)
+
+     ;; delimiter: modifier
+     ("\\(\\*\\|\\?\\|\\^\\|\\$\\?\\)" 1 'font-lock-warning-face)
+     ("\\(++\\|--\\|!=\\)" 1 'font-lock-warning-face)
+     ("\\(->\\|=>\\|\\.>\\|=:\\)" 1 'font-lock-keyword-face)
 
      ;; delimiter: path
-     ("\\(/\\)" . 'font-lock-doc-face)
+     ("\\([:]*[/]+\\)" . 'font-lock-keyword-face)
 
-     ;; path
-     ("/\\([A-Za-z0-9_.-]*\\)" 1 'font-lock-negation-char-face)
-     ("\\([A-Za-z0-9_.-]*\\)/" 1 'font-lock-negation-char-face)
+     ;; path: protocol
+     ("\\([A-Za-z0-9_.-]*\\)://" 1 'font-lock-constant-face)
 
-     ;;
-     ("\\(++\\|--\\|\\.\\.\\.\\|\\^\\*\\|\\*\\^|\\|\\$\\*\\|\\$\\?\\)" .
-       'font-lock-warning-face)
-     ("\\([*|`@#?]+\\)" . 'font-lock-warning-face)
+     ;; path: dirname
+     ("[ \t]*\\(\\.\\)[ \t\n]" 1 'font-lock-negation-char-face)
+     ("[:]*/\\([A-Za-z0-9_.-]*\\)" 1 'font-lock-negation-char-face)
+     ("\\([A-Za-z0-9_.-]*\\)[:]*/" 1 'font-lock-negation-char-face)
+
+     ;; keyword
+     (,modern-sh-keywords-regexp . font-lock-keyword-face)
 
      ;; variable define
-     ("\\([A-Za-z_.-][A-Za-z0-9_.-]*\\)[ \t]*[=[]" 1
-       'font-lock-variable-name-face)
+     ("\\([A-Za-z_][A-Za-z0-9_]*\\)[ \t]*[=[]" 1 'font-lock-variable-name-face)
 
      ;; builtin
      (,modern-sh-builtin-keywords-regexp . font-lock-warning-face)
 
      ;; declaration
-     (,modern-sh-declaration-keywords-regexp . font-lock-preprocessor-face)
+     (,modern-sh-declaration-keywords-regexp . font-lock-keyword-face)
 
      ;; preprocessor
      (,modern-sh-preprocessor-keywords-regexp . font-lock-preprocessor-face)
 
-     ;; keyword
-     (,modern-sh-keywords-regexp . font-lock-keyword-face)
-
      ;; operator function
-     (,modern-sh-operator-functions-regexp . font-lock-builtin-face)
+     ;; (,modern-sh-operator-functions-regexp . font-lock-builtin-face)
 
      ;; constants reference
      (,modern-sh-constant-regexp . font-lock-constant-face)
 
-     ;; function
-     ("\\(?:function\s+\\)*\\([A-Za-z_.-][A-Za-z0-9_.-]*\\)[ \t]*(" 1
+     ;; function define
+     ("\\(?:function\s+\\)*\\([A-Za-z_-][A-Za-z0-9_-]*\\)[ \t]*(" 1
        'font-lock-function-name-face)
 
-     ;; command
-     ("^[ \t]*\\([A-Za-z_.-]+[A-Za-z0-9_.-]+\\)[ \t]*" 1
+     ;; commands
+     ("^[ \t]*\\([A-Za-z_.]+[A-Za-z0-9_.]+\\)[ \t]*\\(||\\)?" 1
        'font-lock-function-name-face)
 
      ;; variable refs
-     ("\\([A-Za-z_.-][A-Za-z0-9_.-]*\\)" . 'font-lock-variable-name-face)
+     ("\\([A-Za-z_]+[A-Za-z0-9_]*\\)" . 'font-lock-variable-name-face)
+
+     ;; negation-char literals
+     ("\\(\\\\[A-Za-z0-9\"'`$&@#_=*+/-]*\\)" . 'font-lock-negation-char-face)
 
      ;; numeric literals
-     ("[ \t=><([,;$+-*|]\\([0-9][0-9a-zA-Z_.-]*\\)+" 1 'font-lock-constant-face)
+     ("\\([0-9]+[0-9a-zA-Z_.+-]*\\)+" 1 'font-lock-constant-face)
 
-     ;; type
-     ;; ("\\([A-Z][A-Za-z0-9_]*\\)" 1 'font-lock-type-face)
-
-     ;; delimiter: modifier
-     ("\\(->\\|=>\\|\\.>\\|=:\\|\\.\\.\\)" 1 'font-lock-keyword-face)
-
-     ;; delimiter: . , ; separate
-     ("\\([,;]+\\)" 1 'font-lock-comment-delimiter-face)
+     ;; delimiter: , ; : separate
+     ("\\([,;:]+\\)" 1 'font-lock-comment-delimiter-face)
 
      ;; delimiter: operator symbols
-     ("\\([%~/?!&$|`/^/*//]+\\)" 1 'font-lock-warning-face)
-     ("\\([=<>]+\\)" 1 'font-lock-negation-char-face)
-
-     ;; delimiter: = : separate
-     ("[^%~^!=<>+-*/]\\([=:]\\)[^%~^!=<>+-*/]" 1
-       'font-lock-comment-delimiter-face)
+     ("\\([>=<~|]+\\)" 1 'font-lock-keyword-face)
+     ("\\([$&*`@#?%&!^*/]+\\)" 1 'font-lock-warning-face)
 
      ;; delimiter: brackets
      ("\\(\\[\\|\\]\\|[(){}]\\)" 1 'font-lock-comment-delimiter-face))
