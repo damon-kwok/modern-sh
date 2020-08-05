@@ -121,7 +121,7 @@
      ("${\\([A-Za-z0-9_#@-]+\\)" 1 'font-lock-warning-face)
 
      ;; command options
-     ("^[ \t]*\\([A-Za-z_.-][A-Za-z0-9_.=@?#*/+-]+\\)[ \t]*)" 1
+     ("^[ \t]*\\([A-Za-z0-9_.=@?#/+-]+\\)[*]*[ \t]*)" 1
        'font-lock-negation-char-face)
      ("[ \t]\\([+-]+[A-Za-z0-9_]+\\)" 1 'font-lock-builtin-face)
      ("|\\([A-Za-z_.-][A-Za-z0-9_]+\\)" 1 'font-lock-builtin-face)
