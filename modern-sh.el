@@ -348,25 +348,30 @@ Optional argument BUILD If the tags file does not exist, execute the build."
   :init-value nil
   :lighter " modern-sh"
   :group 'modern-sh
-  ;;
+  ;; "declare" "typeset" "set"
   (setq-local imenu-generic-expression ;;
     '(("TODO" ".*TODO:[ \t]*\\(.*\\)$" 1)
        ("function"
          "^\\(function[ \t]*\\)?\\([A-Za-z0-9_-]+\\)[ \t]*\\((.*)\\)[ \t{]*" 2)
+       ("variable"
+         "^[ \t]*\\(declare\\|typeset\\|set\\)[ \t]+\\([A-Za-z0-9_-]+\\)" 2)
+       ("unset" "unset[ \t]+\\([A-Za-z0-9_-]+\\)" 1)
        ("export" "export[ \t]+\\([A-Za-z0-9_-]+\\)[ \t]*=" 1)
-       ("readonly" "readonly[ \t]+\\([A-Za-z0-9_-]+\\)[ \t]*=" 1)))
+       ("readonly" "readonly[ \t]+\\([A-Za-z0-9_-]+\\)[ \t]*=" 1)
+       ("eval" "^[ \t]*\\(eval\\|source\\|\\.\\)[ \t]+\\(.*\\)$" 2)
+       ("exit" "[ \t]*\\(exit[ \t]+.*\\)$" 1)))
   ;;
   (if modern-sh-mode ;;
     (progn           ;
       (modern-sh-add-keywords)
       (imenu-add-to-menubar "Index")
-      (define-key sh-mode-map (kbd "C-x C-e")  'eir-eval-in-shell)
+      (define-key sh-mode-map (kbd "C-x C-e") #'eir-eval-in-shell)
       (add-hook 'after-save-hook #'modern-sh-after-save-hook nil t)
       (modern-sh-load-tags))
     (progn                              ;
       (modern-sh-remove-keywords)
       (imenu--cleanup)
-      (substitute-key-definition 'eir-eval-in-shell nil sh-mode-map)
+      (substitute-key-definition #'eir-eval-in-shell nil sh-mode-map)
       (remove-hook 'after-save-hook #'modern-sh-after-save-hook)))
   ;;
   (font-lock-flush))
