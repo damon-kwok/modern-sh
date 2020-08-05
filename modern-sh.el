@@ -4,7 +4,7 @@
 ;; Version: 0.0.1
 ;; URL: https://github.com/damon-kwok/modern-sh
 ;; Keywords: languages programming
-;; Package-Requires: ((emacs "25.1") (hydra "0.15.0"))
+;; Package-Requires: ((emacs "25.1") (hydra "0.15.0") (eval-in-repl "0.9.7"))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -31,6 +31,7 @@
 (require 'xref)
 (require 'hydra)
 (require 'imenu)
+(require 'eval-in-repl-shell)
 
 (defvar modern-sh-mode-hook nil)
 
@@ -359,11 +360,13 @@ Optional argument BUILD If the tags file does not exist, execute the build."
     (progn           ;
       (modern-sh-add-keywords)
       (imenu-add-to-menubar "Index")
+      (define-key sh-mode-map (kbd "C-x C-e")  'eir-eval-in-shell)
       (add-hook 'after-save-hook #'modern-sh-after-save-hook nil t)
       (modern-sh-load-tags))
     (progn                              ;
       (modern-sh-remove-keywords)
       (imenu--cleanup)
+      (substitute-key-definition 'eir-eval-in-shell nil sh-mode-map)
       (remove-hook 'after-save-hook #'modern-sh-after-save-hook)))
   ;;
   (font-lock-flush))

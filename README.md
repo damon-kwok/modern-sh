@@ -17,6 +17,7 @@ An Emacs minor mode for editing shell script.
 - [x] Auto format on save
 - [x] Code navigation (using `imenu`)
 - [x] Go to definition (using `ctags`)
+- [x] REPL
 <!-- - [ ] Code completion (using `company-mode`) -->
 <!-- - [ ] Indentation -->
 <!-- - [x] TODO highlighting -->
