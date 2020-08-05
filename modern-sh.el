@@ -38,45 +38,37 @@
   "Keymap for Modern shell minor mode.")
 
 (defconst modern-sh-keywords
-  '("let" "local"                       ;
-     "if" "else" "elif" "then" "fi"     ;
+  '("if" "else" "elif" "then" "fi"      ;
      "case" "esac" "for" "in"           ;
      "while" "until" "do" "done")
   "Modern shell keywords.")
 
-(defconst modern-sh-declaration-keywords '("function" "declare")
+(defconst modern-sh-declaration-keywords
+  '("function" "let" "local" "declare" "typeset" "set")
   "Modern shell declaration keywords.")
 
 (defconst modern-sh-preprocessor-keywords
-  '("source"                             ;
+  '("source" "eval"                      ;
      "emacs" "em" "vi" "vim" "nano" "ed" ;
      "sh" "bash" "zsh" "csh" "ksh" "fish" "pwsh")
   "Modern shell preprocessor keywords.")
 
 (defconst modern-sh-careful-keywords
-  ;;
-  '("export" "eval" "set" "unset"       ;
-     "return" "break" "continue"        ;
-     "shift" "pushd" "popd")
+  '("return" "break" "continue"         ;
+     "export" "readonly" "alias" "unset" "shift")
   "Modern shell language careful keywords.")
 
 (defconst modern-sh-builtin-keywords
-  '("su" "sudo" "chroot" "exit" "rm"    ;
-     "kill" "pkill" "skill" "killall"   ;
-     "passwd" "chmod" "sleep" "read")
+  '("chroot" "passwd" "chmod" "sleep" "read" ;
+     "su" "sudo" "exit" "rm"                 ;
+     "kill" "pkill" "skill" "killall"        ;
+     "pushd" "popd")
   "Modern shell language keywords.")
 
-(defconst modern-sh-constants
-  '("true" "false" "test" "command"                 ;
-     "HOME" "EDITOR" "ED"                           ;
-     "PATH" "MANPATH" "INFOPATH"                    ;
-     "LIBRARY_PATH" "LD_LIBRARY_PATH" "LD_RUN_PATH" ;
-     "PKG_CONFIG_PATH"                              ;
-     "CMAKE_INCLUDE_PATH" "CMAKE_LIBRARY_PATH"      ;
-     "C_INCLUDE_PATH" "CPLUS_INCLUDE_PATH")
+(defconst modern-sh-constants '("true" "false" "test" "command")
   "Common constants.")
 
-(defconst modern-sh-operator-functions '("-eq" "-ne" "-gt" "-lt" "-ge" "-le")
+(defconst modern-sh-operator-functions '()
   "Modern shell language operators functions.")
 
 ;; create the regex string for each class of keywords
@@ -360,8 +352,8 @@ Optional argument BUILD If the tags file does not exist, execute the build."
     '(("TODO" ".*TODO:[ \t]*\\(.*\\)$" 1)
        ("function"
          "^\\(function[ \t]*\\)?\\([A-Za-z0-9_-]+\\)[ \t]*\\((.*)\\)[ \t{]*" 2)
-       ("export"
-         "export[ \t]+\\([A-Za-z0-9_-]+\\)[ \t]*=" 1)))
+       ("export" "export[ \t]+\\([A-Za-z0-9_-]+\\)[ \t]*=" 1)
+       ("readonly" "readonly[ \t]+\\([A-Za-z0-9_-]+\\)[ \t]*=" 1)))
   ;;
   (if modern-sh-mode ;;
     (progn           ;
