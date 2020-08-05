@@ -48,7 +48,9 @@
   "Modern shell declaration keywords.")
 
 (defconst modern-sh-preprocessor-keywords
-  '("source" "sh" "bash" "zsh" "csh" "ksh" "fish" "pwsh")
+  '("source"                             ;
+     "emacs" "em" "vi" "vim" "nano" "ed" ;
+     "sh" "bash" "zsh" "csh" "ksh" "fish" "pwsh")
   "Modern shell preprocessor keywords.")
 
 (defconst modern-sh-careful-keywords
@@ -65,7 +67,7 @@
   "Modern shell language keywords.")
 
 (defconst modern-sh-constants
-  '("true" "false" "test"                           ;
+  '("true" "false" "test" "command"                 ;
      "HOME" "EDITOR" "ED"                           ;
      "PATH" "MANPATH" "INFOPATH"                    ;
      "LIBRARY_PATH" "LD_LIBRARY_PATH" "LD_RUN_PATH" ;
