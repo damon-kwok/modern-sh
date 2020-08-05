@@ -4,7 +4,7 @@
 ;; Version: 0.0.1
 ;; URL: https://github.com/damon-kwok/modern-sh
 ;; Keywords: languages programming
-;; Package-Requires: ((emacs "24.3") (hydra "0.15.0"))
+;; Package-Requires: ((emacs "25.1") (hydra "0.15.0"))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -372,12 +372,7 @@ Optional argument BUILD If the tags file does not exist, execute the build."
       (imenu--cleanup)
       (remove-hook 'after-save-hook #'modern-sh-after-save-hook)))
   ;;
-  ;; As of Emacs 24.4, `font-lock-fontify-buffer' is not legal to
-  ;; call, instead `font-lock-flush' should be used.
-  (if (fboundp 'font-lock-flush)
-    (font-lock-flush)
-    (when font-lock-mode ;;
-      (with-no-warnings (font-lock-fontify-buffer)))))
+  (font-lock-flush))
 
 (provide 'modern-sh)
 
