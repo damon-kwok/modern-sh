@@ -359,7 +359,9 @@ Optional argument BUILD If the tags file does not exist, execute the build."
   (setq-local imenu-generic-expression ;;
     '(("TODO" ".*TODO:[ \t]*\\(.*\\)$" 1)
        ("function"
-         "^\\(function[ \t]*\\)?\\([a-z0-9_]+\\)[ \t]*\\((.*)\\)[ \t{]*" 2)))
+         "^\\(function[ \t]*\\)?\\([A-Za-z0-9_-]+\\)[ \t]*\\((.*)\\)[ \t{]*" 2)
+       ("export"
+         "export[ \t]+\\([A-Za-z0-9_-]+\\)[ \t]*=" 1)))
   ;;
   (if modern-sh-mode ;;
     (progn           ;
