@@ -262,17 +262,7 @@ Optional argument PATH: project path."
 (defun modern-sh-project-run ()
   "Run project."
   (interactive)
-  (let* ((bin1 (concat (modern-sh-project-root) "bin/"
-                 (modern-sh-project-name)))
-          (bin2 (concat (modern-sh-project-root) "/" (modern-sh-project-name)))
-          (bin3 (concat (modern-sh-buffer-dirname) "/"
-                  (modern-sh-project-name))))
-    (if (file-exists-p bin1)
-      (modern-sh-run-command bin1)
-      (if (file-exists-p bin2)
-        (modern-sh-run-command bin2)
-        (if (file-exists-p bin3)
-          (modern-sh-run-command bin3))))))
+  (message "run"))
 
 (defun modern-sh-banner-default ()
   "Modern shell banner."
