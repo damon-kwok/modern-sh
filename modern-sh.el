@@ -129,9 +129,9 @@
      ;; command options
      ("^[ \t]*\\([A-Za-z0-9_.=@?#/+-]+\\)[*]*[ \t]*)" 1
        'font-lock-negation-char-face)
-     ("[ \t]\\([+-]+[A-Za-z0-9_]+\\)" 1 'font-lock-builtin-face)
-     ("|\\([A-Za-z_.-][A-Za-z0-9_]+\\)" 1 'font-lock-builtin-face)
-     ("\\([A-Za-z_.-][A-Za-z0-9_]+\\)|" 1 'font-lock-builtin-face)
+     ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)" 1 'font-lock-builtin-face)
+     ("|\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)" 1 'font-lock-builtin-face)
+     ("\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)|" 1 'font-lock-builtin-face)
 
      ;; delimiter: modifier
      ("\\(\\*\\|\\?\\|\\^\\|\\$\\?\\)" 1 'font-lock-warning-face)
