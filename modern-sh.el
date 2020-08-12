@@ -238,8 +238,10 @@ Optional argument PATH: project path."
 (defun modern-sh-run-command (command &optional path)
   "Return `COMMAND' in the root of the Modern shell project.
 Optional argument PATH: project path."
-  (setq default-directory (if path path (modern-sh-project-root path)))
-  (compile command))
+  (let ((oldir default-directory))
+    (setq default-directory (if Path Path (modern-sh-project-root Path)))
+    (compile command)
+    (setq default-directory oldir)))
 
 (defun modern-sh-project-build ()
   "Build project."
@@ -317,11 +319,12 @@ Optional argument PATH: project path."
       (kill-buffer tags-buffer))
     (if tags-buffer2 ;;
       (kill-buffer tags-buffer2)))
-  (let ((ctags-params                   ;
-          (concat "ctags -e -R . ")))
+  (let* ((oldir default-directory))
+    (ctags-params (concat "ctags -e -R . "))
     (setq default-directory (modern-sh-project-root))
     (message "ctags:%s" (shell-command-to-string ctags-params))
-    (modern-sh-load-tags)))
+    (modern-sh-load-tags)
+    (setq default-directory oldir)))
 
 (defun modern-sh-load-tags
   (&optional
