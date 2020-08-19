@@ -189,13 +189,13 @@
      ("[:][ \t]*\\([A-Za-z_]+[A-Za-z0-9_-]*\\)" 1 'font-lock-constant-face)
 
      ;; variable refs
-     ("[-+*/=.,:([{ \t]+\\([A-Za-z_]+[-]*[A-Za-z0-9_]+\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
+     ("[-+*/=.,:([{ \t]+\\([A-Za-z_]+[0-9-]*[A-Za-z_]+\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
 
      ;; negation-char literals
      ("\\(\\\\[A-Za-z0-9\"'`$@#_=*/+-]*\\)" 1 'font-lock-negation-char-face)
 
      ;; numeric literals
-     ("\\([0-9]+[0-9a-zA-Z_]*\\)+" 1 'font-lock-constant-face)
+     ("\\([0-9]+[A-Za-z0-9_]*\\)+" 1 'font-lock-constant-face)
 
      ;; delimiter: , ; : separate
      ("\\([,;:.]+\\)" 1 'font-lock-comment-delimiter-face)
