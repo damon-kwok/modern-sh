@@ -123,15 +123,17 @@
      (,modern-sh-careful-keywords-regexp . font-lock-warning-face)
 
      ;; env variable
-     ("[$&]+\\([A-Za-z0-9_#@.-]+\\)" . 'font-lock-warning-face)
+     ("[$>&]+\\([A-Za-z0-9_#@-]+\\)" . 'font-lock-warning-face)
      ("${\\([A-Za-z0-9_#@-]+\\)" 1 'font-lock-warning-face)
 
-     ;; command options
-     ("^[ \t]*\\([A-Za-z0-9_.=@?#/+-]+\\)[*]*[ \t]*)" 1
+     ;; case options
+     ("^[ \t[]*\\([A-Za-z0-9_.=@?#/+-]+\\)[*]*[] \t]*)" 1
        'font-lock-negation-char-face)
+     ("[^|][|][ \t]*\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)" 1 'font-lock-negation-char-face)
+     ("\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)[ \t]*[|][^|]" 1 'font-lock-negation-char-face)
+
+     ;; command options
      ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)" 1 'font-lock-builtin-face)
-     ("|\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)" 1 'font-lock-builtin-face)
-     ("\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)|" 1 'font-lock-builtin-face)
 
      ;; delimiter: modifier
      ("\\(\\*\\|\\?\\|\\^\\|\\$\\?\\)" 1 'font-lock-warning-face)
@@ -145,7 +147,8 @@
      ("\\([A-Za-z0-9_.-]*\\)://" 1 'font-lock-constant-face)
 
      ;; path: dirname
-     ("[ \t]*\\(\\.\\)[ \t\n]" 1 'font-lock-negation-char-face)
+     ;; ("[ \t]*\\(\\.\\)[ \t\n]" 1 'font-lock-negation-char-face)
+     ("[ \t]*\\([.]+\\)[ \t\n]" 1 'font-lock-preprocessor-face)
      ("[:]*/\\([A-Za-z0-9_.-]*\\)" 1 'font-lock-negation-char-face)
      ("\\([A-Za-z0-9_.-]*\\)[:]*/" 1 'font-lock-negation-char-face)
 
@@ -171,24 +174,31 @@
      (,modern-sh-constant-regexp . font-lock-constant-face)
 
      ;; function define
-     ("\\(?:function\s+\\)*\\([A-Za-z_-][A-Za-z0-9_-]*\\)[ \t]*(" 1
+     ("\\(function\s+\\)*\\([A-Za-z_-][A-Za-z0-9_-]*\\)[ \t]*(" 2
        'font-lock-function-name-face)
 
      ;; commands
-     ("^[ \t]*\\([A-Za-z_.]+[A-Za-z0-9_.]+\\)[ \t]*\\(||\\)?" 1
+     ("^[ \t]*\\([A-Za-z_][.-]*[A-Za-z0-9_]+\\)[ \t]*\\(||\\)?" 1
        'font-lock-function-name-face)
 
+     ;；format
+     ("\\(%[A-Za-z0-9]*\\)" 1 'font-lock-preprocessor-face)
+
+     ;; values
+     ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t=]+\\([A-Za-z0-9_.-]+\\)" 2 'font-lock-constant-face)
+     ("[:][ \t]*\\([A-Za-z_]+[A-Za-z0-9_-]*\\)" 1 'font-lock-constant-face)
+
      ;; variable refs
-     ("\\([A-Za-z_]+[A-Za-z0-9_]*\\)" . 'font-lock-variable-name-face)
+     ("[-+*/=.,:([{ \t]+\\([A-Za-z_][A-Za-z0-9_]*\\)" 1 'font-lock-variable-name-face)
 
      ;; negation-char literals
-     ("\\(\\\\[A-Za-z0-9\"'`$@#_=*+/-]*\\)" . 'font-lock-negation-char-face)
+     ("\\(\\\\[A-Za-z0-9\"'`$@#_=*/+-]*\\)" 1 'font-lock-negation-char-face)
 
      ;; numeric literals
-     ("\\([0-9]+[0-9a-zA-Z_.+-]*\\)+" 1 'font-lock-constant-face)
+     ("\\([0-9]+[0-9a-zA-Z_]*\\)+" 1 'font-lock-constant-face)
 
      ;; delimiter: , ; : separate
-     ("\\([,;:]+\\)" 1 'font-lock-comment-delimiter-face)
+     ("\\([,;:.]+\\)" 1 'font-lock-comment-delimiter-face)
 
      ;; delimiter: operator symbols
      ("\\([>=<~|&]+\\)" 1 'font-lock-keyword-face)
@@ -319,8 +329,8 @@ Optional argument PATH: project path."
       (kill-buffer tags-buffer))
     (if tags-buffer2 ;;
       (kill-buffer tags-buffer2)))
-  (let* ((oldir default-directory))
-    (ctags-params (concat "ctags -e -R . "))
+  (let* ((oldir default-directory)
+          (ctags-params (concat "ctags -e -R . ")))
     (setq default-directory (modern-sh-project-root))
     (message "ctags:%s" (shell-command-to-string ctags-params))
     (modern-sh-load-tags)
