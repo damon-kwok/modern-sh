@@ -249,7 +249,7 @@ Optional argument PATH: project path."
   "Return `COMMAND' in the root of the Modern shell project.
 Optional argument PATH: project path."
   (let ((oldir default-directory))
-    (setq default-directory (if Path Path (modern-sh-project-root Path)))
+    (setq default-directory (if path path (modern-sh-project-root path)))
     (compile command)
     (setq default-directory oldir)))
 
