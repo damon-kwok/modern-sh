@@ -129,8 +129,10 @@
      ;; case options
      ("^[ \t[]*\\([A-Za-z0-9_.=@?#/+-]+\\)[*]*[] \t]*)" 1
        'font-lock-negation-char-face)
-     ("[^|]|[ \t]*\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)" 1 'font-lock-negation-char-face)
-     ("\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)[ \t]*|[^|]" 1 'font-lock-negation-char-face)
+     ("[^|]|[ \t]*\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)" 1
+       'font-lock-negation-char-face)
+     ("\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)[ \t]*|[^|]" 1
+       'font-lock-negation-char-face)
 
      ;; command options
      ("[ \t]\\([+-]+[A-Za-z_][A-Za-z0-9_-]*\\)" 1 'font-lock-builtin-face)
@@ -180,16 +182,18 @@
      ("^[ \t]*\\([A-Za-z_]+[.-]*[A-Za-z0-9_]+\\)[ \t]*\\(||\\)?" 1
        'font-lock-function-name-face)
 
-     ;；format
+                                        ;；format
      ("\\(%[A-Za-z0-9]*\\)" 1 'font-lock-preprocessor-face)
 
      ;; values
-     ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t=]+\\([A-Za-z0-9_.-]+\\)" 2 'font-lock-constant-face)
+     ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t=]+\\([A-Za-z0-9_.-]+\\)" 2
+       'font-lock-constant-face)
      ("[:][ \t]*\\([A-Za-z_]+[A-Za-z0-9_-]*\\)" 1 'font-lock-constant-face)
 
      ;; variable refs
      ;; ("[-+*/=.,:([{ \t]+\\([A-Za-z_]+[0-9-]*[A-Za-z_]+\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
-     ("\\([A-Za-z_]+[0-9-]*[A-Za-z_]+\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
+     ("\\([A-Za-z_]+[0-9-]*[A-Za-z_]+\\|[A-Za-z]\\)" 1
+       'font-lock-variable-name-face)
 
      ;; negation-char literals
      ("\\(\\\\[A-Za-z0-9\"'`$@#_=*/+-]*\\)" 1 'font-lock-negation-char-face)
@@ -363,7 +367,7 @@ Optional argument BUILD If the tags file does not exist, execute the build."
   :lighter " modern-sh"
   :group 'modern-sh
   ;; "declare" "typeset" "set"
-  (setq-local imenu-generic-expression ;;
+  (setq-local imenu-generic-expression  ;
     '(("TODO" ".*TODO:[ \t]*\\(.*\\)$" 1)
        ("function"
          "^\\(function[ \t]*\\)?\\([A-Za-z0-9_-]+\\)[ \t]*\\((.*)\\)[ \t{]*" 2)
@@ -375,8 +379,8 @@ Optional argument BUILD If the tags file does not exist, execute the build."
        ("eval" "^[ \t]*\\(eval\\|source\\|\\.\\)[ \t]+\\(.*\\)$" 2)
        ("exit" "[ \t]*\\(exit[ \t]+.*\\)$" 1)))
   ;;
-  (if modern-sh-mode ;;
-    (progn           ;
+  (if modern-sh-mode                    ;
+    (progn                              ;
       (modern-sh-add-keywords)
       (imenu-add-to-menubar "Index")
       (define-key sh-mode-map (kbd "C-x C-e") #'eir-eval-in-shell)
