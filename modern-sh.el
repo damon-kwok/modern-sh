@@ -129,11 +129,11 @@
      ;; case options
      ("^[ \t[]*\\([A-Za-z0-9_.=@?#/+-]+\\)[*]*[] \t]*)" 1
        'font-lock-negation-char-face)
-     ("[^|][|][ \t]*\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)" 1 'font-lock-negation-char-face)
-     ("\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)[ \t]*[|][^|]" 1 'font-lock-negation-char-face)
+     ("[^|]|[ \t]*\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)" 1 'font-lock-negation-char-face)
+     ("\\([A-Za-z_.-][A-Za-z0-9_.-]+\\)[ \t]*|[^|]" 1 'font-lock-negation-char-face)
 
      ;; command options
-     ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)" 1 'font-lock-builtin-face)
+     ("[ \t]\\([+-]+[A-Za-z_][A-Za-z0-9_-]*\\)" 1 'font-lock-builtin-face)
 
      ;; delimiter: modifier
      ("\\(\\*\\|\\?\\|\\^\\|\\$\\?\\)" 1 'font-lock-warning-face)
@@ -141,14 +141,13 @@
      ("\\(->\\|=>\\|\\.>\\|=:\\)" 1 'font-lock-keyword-face)
 
      ;; delimiter: path
-     ("\\([:]*[/]+\\)" . 'font-lock-keyword-face)
+     ("\\([:]*[/]+\\)" 1 'font-lock-keyword-face)
 
      ;; path: protocol
      ("\\([A-Za-z0-9_.-]*\\)://" 1 'font-lock-constant-face)
 
      ;; path: dirname
-     ;; ("[ \t]*\\(\\.\\)[ \t\n]" 1 'font-lock-negation-char-face)
-     ("[ \t]*\\([.]+\\)[ \t\n]" 1 'font-lock-preprocessor-face)
+     ("[ \t]*\\([.]+\\)[ \t\n]" 1 'font-lock-negation-char-face)
      ("[:]*/\\([A-Za-z0-9_.-]*\\)" 1 'font-lock-negation-char-face)
      ("\\([A-Za-z0-9_.-]*\\)[:]*/" 1 'font-lock-negation-char-face)
 
@@ -168,7 +167,7 @@
      (,modern-sh-preprocessor-keywords-regexp . font-lock-preprocessor-face)
 
      ;; operator function
-     ;; (,modern-sh-operator-functions-regexp . font-lock-builtin-face)
+     (,modern-sh-operator-functions-regexp . font-lock-builtin-face)
 
      ;; constants reference
      (,modern-sh-constant-regexp . font-lock-constant-face)
@@ -189,7 +188,8 @@
      ("[:][ \t]*\\([A-Za-z_]+[A-Za-z0-9_-]*\\)" 1 'font-lock-constant-face)
 
      ;; variable refs
-     ("[-+*/=.,:([{ \t]+\\([A-Za-z_]+[0-9-]*[A-Za-z_]+\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
+     ;; ("[-+*/=.,:([{ \t]+\\([A-Za-z_]+[0-9-]*[A-Za-z_]+\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
+     ("\\([A-Za-z_]+[0-9-]*[A-Za-z_]+\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
 
      ;; negation-char literals
      ("\\(\\\\[A-Za-z0-9\"'`$@#_=*/+-]*\\)" 1 'font-lock-negation-char-face)
