@@ -83,8 +83,7 @@
 (defconst modern-sh-operator-functions '()
   "Modern shell language operators functions.")
 
-;; create the regex string for each class of keywords
-
+;;; create the regex string for each class of keywords
 (defconst modern-sh-keywords-regexp (regexp-opt modern-sh-keywords 'words)
   "Regular expression for matching keywords.")
 
@@ -179,10 +178,10 @@
        'font-lock-function-name-face)
 
      ;; commands
-     ("^[ \t]*\\([A-Za-z_]+[.-]*[A-Za-z0-9_]+\\)[ \t]*\\(||\\)?" 1
+     ("^[ \t]*\\([A-Za-z_.-][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)[ \t]*\\(||\\)?" 1
        'font-lock-function-name-face)
 
-                                        ;；format
+     ;; format
      ("\\(%[A-Za-z0-9]*\\)" 1 'font-lock-preprocessor-face)
 
      ;; values
@@ -191,9 +190,7 @@
      ("[:][ \t]*\\([A-Za-z_]+[A-Za-z0-9_-]*\\)" 1 'font-lock-constant-face)
 
      ;; variable refs
-     ;; ("[-+*/=.,:([{ \t]+\\([A-Za-z_]+[0-9-]*[A-Za-z_]+\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
-     ("\\([A-Za-z_]+[0-9-]*[A-Za-z_]+\\|[A-Za-z]\\)" 1
-       'font-lock-variable-name-face)
+     ("[-+*/=,:;([{ \t]+\\([A-Za-z_.][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
 
      ;; negation-char literals
      ("\\(\\\\[A-Za-z0-9\"'`$@#_=*/+-]*\\)" 1 'font-lock-negation-char-face)
@@ -201,8 +198,8 @@
      ;; numeric literals
      ("\\([0-9]+[A-Za-z0-9_]*\\)+" 1 'font-lock-constant-face)
 
-     ;; delimiter: , ; : separate
-     ("\\([,;:.]+\\)" 1 'font-lock-comment-delimiter-face)
+     ;; delimiter: .,:; separate
+     ("\\([.,:;]+\\)" 1 'font-lock-comment-delimiter-face)
 
      ;; delimiter: operator symbols
      ("\\([>=<~|&]+\\)" 1 'font-lock-keyword-face)
