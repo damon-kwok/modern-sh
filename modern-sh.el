@@ -178,7 +178,7 @@
        'font-lock-function-name-face)
 
      ;; commands
-     ("^[ \t]*\\([A-Za-z_.-][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)[ \t]*\\(||\\)?" 1
+     ("^[ \t]*\\(sudo[ \t]\\)?\\([A-Za-z_.-][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)[ \t]*\\(||\\)?" 2
        'font-lock-function-name-face)
 
      ;; format
