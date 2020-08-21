@@ -74,7 +74,7 @@
   '("chroot" "passwd" "chmod" "sleep" "read" ;
      "su" "sudo" "exit" "rm"                 ;
      "kill" "pkill" "skill" "killall"        ;
-     "pushd" "popd" "install")
+     "pushd" "popd" "install" "groupinstall")
   "Modern shell language keywords.")
 
 (defconst modern-sh-constants '("true" "false" "test" "command")
@@ -112,9 +112,6 @@
 
 (defconst modern-sh-font-lock-keywords
   `(
-     ;; wrap
-     ;; ("\\([ \t]*\\\\[ \t]*$\\)" . 'font-lock-warning-face)
-
      ;; source
      ("^[ \t]*\\(\\.\\)[ \t\n]" 1 'font-lock-warning-face)
 
@@ -179,7 +176,7 @@
 
      ;; wrap line
      ;; ("\\(\\\\[ \t]*\n\\)\\(.*[^\\]\\)\\($\\|[ \t]+-\\|[ \t]*\\\\[ \t]*$\\)" 2 'font-lock-variable-name-face)
-     ("\\(\\\\[ \t]*\n\\)\\([A-Za-z0-9 \t-]+[^\\]\\)" 2 'font-lock-variable-name-face)
+     ("\\(\\\\[ \t]*\n\\)\\([A-Za-z0-9_ \t+-]+[^\\]\\)" 2 'font-lock-variable-name-face)
      ("\\(.*\\)[ \t]*\\(\\\\[ \t]*$\\)" 1 'font-lock-variable-name-face)
 
      ;; commands
