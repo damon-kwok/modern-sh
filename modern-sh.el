@@ -74,7 +74,7 @@
   '("chroot" "passwd" "chmod" "sleep" "read" ;
      "su" "sudo" "exit" "rm"                 ;
      "kill" "pkill" "skill" "killall"        ;
-     "pushd" "popd")
+     "pushd" "popd" "install")
   "Modern shell language keywords.")
 
 (defconst modern-sh-constants '("true" "false" "test" "command")
@@ -113,7 +113,7 @@
 (defconst modern-sh-font-lock-keywords
   `(
      ;; wrap
-     ("\\([ \t]*\\\\$\\)" . 'font-lock-warning-face)
+     ;; ("\\([ \t]*\\\\[ \t]*$\\)" . 'font-lock-warning-face)
 
      ;; source
      ("^[ \t]*\\(\\.\\)[ \t\n]" 1 'font-lock-warning-face)
@@ -177,6 +177,11 @@
      ("\\(function\s+\\)*\\([A-Za-z_-][A-Za-z0-9_-]*\\)[ \t]*(" 2
        'font-lock-function-name-face)
 
+     ;; wrap line
+     ;; ("\\(\\\\[ \t]*\n\\)\\(.*[^\\]\\)\\($\\|[ \t]+-\\|[ \t]*\\\\[ \t]*$\\)" 2 'font-lock-variable-name-face)
+     ("\\(\\\\[ \t]*\n\\)\\([A-Za-z0-9 \t-]+[^\\]\\)" 2 'font-lock-variable-name-face)
+     ("\\(.*\\)[ \t]*\\(\\\\[ \t]*$\\)" 1 'font-lock-variable-name-face)
+
      ;; commands
      ("^[ \t]*\\(sudo[ \t]\\)?\\([A-Za-z_.-][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)[ \t]*\\(||\\)?" 2
        'font-lock-function-name-face)
@@ -185,12 +190,27 @@
      ("\\(%[A-Za-z0-9]*\\)" 1 'font-lock-preprocessor-face)
 
      ;; values
-     ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t=]+\\([A-Za-z0-9_.-]+\\)" 2
+     ;; values: easy
+     ;; ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t]*[=]*[ \t]*\\(.*[^\\]\\)\\($\\|[ \t]+-\\|[ \t]*\\\\[ \t]*$\\)" 2
+       ;; 'font-lock-constant-face)
+     ;; values: plus
+     ;; ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t]*[=]*[ \t]*\\([A-Za-z0-9][A-Za-z0-9_ \t-]*\\)\\($\\|[ \t]+-\\|[ \t]*\\\\[ \t]*$\\)" 2
+       ;; 'font-lock-constant-face)
+     ;; values: only =
+     ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t]*=[ \t]*\\([A-Za-z0-9][A-Za-z0-9_.-]*\\)" 2
        'font-lock-constant-face)
+     ;; values: raw
+     ;; ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t]*[=]*[ \t]*\\([A-Za-z0-9][A-Za-z0-9_.-]*\\)" 2
+       ;; 'font-lock-constant-face)
+
      ("[:][ \t]*\\([A-Za-z_]+[A-Za-z0-9_-]*\\)" 1 'font-lock-constant-face)
 
      ;; variable refs
      ("[-+*/=,:;([{ \t]+\\([A-Za-z_.][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
+
+     ;; wrap symbol
+     ;; ("\\([ \t]*\\\\[ \t]*$\\)" 1 'font-lock-warning-face)
+     ("[ \t]*\\(\\\\[ \t]*$\\)" 1 'font-lock-warning-face)
 
      ;; negation-char literals
      ("\\(\\\\[A-Za-z0-9\"'`$@#_=*/+-]*\\)" 1 'font-lock-negation-char-face)
