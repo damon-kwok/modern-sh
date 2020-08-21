@@ -179,9 +179,11 @@
      ("\\(\\\\[ \t]*\n\\)\\([A-Za-z0-9_ \t+-]+[^\\]\\)" 2 'font-lock-variable-name-face)
      ("\\(.*\\)[ \t]*\\(\\\\[ \t]*$\\)" 1 'font-lock-variable-name-face)
 
-     ;; commands
+     ;; command
      ("^[ \t]*\\(sudo[ \t]\\)?\\([A-Za-z_.-][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)[ \t]*\\(||\\)?" 2
        'font-lock-function-name-face)
+     ("\\(sudo\\)[ \t]+\\([A-Za-z0-9_.-]+\\)" 2 'font-lock-function-name-face)
+     ("\\([A-Za-z0-9_.-]+[ \t]*)\\)[ \t]*\\([A-Za-z0-9_.-]+\\)" 2 'font-lock-function-name-face)
 
      ;; format
      ("\\(%[A-Za-z0-9]*\\)" 1 'font-lock-preprocessor-face)
