@@ -253,7 +253,6 @@ Optional argument PATH: project path."
                    (file-name-directory buffer-file-name) default-directory))
           (curdir (if path (file-name-as-directory path) bufdir))
           (parent (file-name-directory (directory-file-name curdir))))
-    (message "curdir:%s, parent:%s" curdir parent)
     (if (or (not parent)
           (string= parent curdir)
           (string= parent (file-name-as-directory (getenv "HOME")))
