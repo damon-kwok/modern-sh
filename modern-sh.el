@@ -176,14 +176,16 @@
 
      ;; wrap line
      ;; ("\\(\\\\[ \t]*\n\\)\\(.*[^\\]\\)\\($\\|[ \t]+-\\|[ \t]*\\\\[ \t]*$\\)" 2 'font-lock-variable-name-face)
-     ("\\(\\\\[ \t]*\n\\)\\([A-Za-z0-9_ \t+-]+[^\\]\\)" 2 'font-lock-variable-name-face)
+     ("\\(\\\\[ \t]*\n\\)\\([A-Za-z0-9_ \t+-]+[^\\]\\)" 2
+       'font-lock-variable-name-face)
      ("\\(.*\\)[ \t]*\\(\\\\[ \t]*$\\)" 1 'font-lock-variable-name-face)
 
      ;; command
-     ("^[ \t]*\\(sudo[ \t]\\)?\\([A-Za-z_.-][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)[ \t]*\\(||\\)?" 2
-       'font-lock-function-name-face)
+     ("^[ \t]*\\(sudo[ \t]\\)?\\([A-Za-z_.-][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)[ \t]*\\(||\\)?"
+       2 'font-lock-function-name-face)
      ("\\(sudo\\)[ \t]+\\([A-Za-z0-9_.-]+\\)" 2 'font-lock-function-name-face)
-     ("\\([A-Za-z0-9_.-]+[ \t]*)\\)[ \t]*\\([A-Za-z0-9_.-]+\\)" 2 'font-lock-function-name-face)
+     ("\\([A-Za-z0-9_.-]+[ \t]*)\\)[ \t]*\\([A-Za-z0-9_.-]+\\)" 2
+       'font-lock-function-name-face)
 
      ;; format
      ("\\(%[A-Za-z0-9]*\\)" 1 'font-lock-preprocessor-face)
@@ -191,21 +193,21 @@
      ;; values
      ;; values: easy
      ;; ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t]*[=]*[ \t]*\\(.*[^\\]\\)\\($\\|[ \t]+-\\|[ \t]*\\\\[ \t]*$\\)" 2
-       ;; 'font-lock-constant-face)
+     ;; 'font-lock-constant-face)
      ;; values: plus
      ;; ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t]*[=]*[ \t]*\\([A-Za-z0-9][A-Za-z0-9_ \t-]*\\)\\($\\|[ \t]+-\\|[ \t]*\\\\[ \t]*$\\)" 2
-       ;; 'font-lock-constant-face)
+     ;; 'font-lock-constant-face)
      ;; values: only =
-     ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t]*=[ \t]*\\([A-Za-z0-9][A-Za-z0-9_.-]*\\)" 2
-       'font-lock-constant-face)
+     ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t]*=[ \t]*\\([A-Za-z0-9][A-Za-z0-9_.-]*\\)"
+       2 'font-lock-constant-face)
      ;; values: raw
      ;; ("[ \t]\\([+-]+[A-Za-z0-9_.-]+\\)[ \t]*[=]*[ \t]*\\([A-Za-z0-9][A-Za-z0-9_.-]*\\)" 2
-       ;; 'font-lock-constant-face)
-
+     ;; 'font-lock-constant-face)
      ("[:][ \t]*\\([A-Za-z_]+[A-Za-z0-9_-]*\\)" 1 'font-lock-constant-face)
 
      ;; variable refs
-     ("[-+*/=,:;([{ \t]+\\([A-Za-z_.][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)" 1 'font-lock-variable-name-face)
+     ("[-+*/=,:;([{ \t]+\\([A-Za-z_.][A-Za-z0-9_.-]*[A-Za-z0-9_]\\|[A-Za-z]\\)"
+       1 'font-lock-variable-name-face)
 
      ;; wrap symbol
      ;; ("\\([ \t]*\\\\[ \t]*$\\)" 1 'font-lock-warning-face)
@@ -230,8 +232,9 @@
 
 (defun modern-sh-project-root-p (path)
   "Return t if directory `PATH' is the root of the Modern shell project."
-  (let* ((files '("CMakeLists.txt" "make.bat" "Makefile" ;
-                   "Dockerfile" ".editorconfig" ".gitignore"))
+  (let* ((files '("CMakeLists.txt" "make.bat" "Makefile"     ;
+                   "Dockerfile" ".editorconfig" ".gitignore" ;
+                   ".git" ".svn" ".hg"))
           (foundp nil))
     (while (and (> (length files) 0)
              (not foundp))
@@ -250,8 +253,10 @@ Optional argument PATH: project path."
                    (file-name-directory buffer-file-name) default-directory))
           (curdir (if path (file-name-as-directory path) bufdir))
           (parent (file-name-directory (directory-file-name curdir))))
+    (message "curdir:%s, parent:%s" curdir parent)
     (if (or (not parent)
           (string= parent curdir)
+          (string= parent (file-name-as-directory (getenv "HOME")))
           (string= parent "/")
           (modern-sh-project-root-p curdir)) ;
       curdir                                 ;
