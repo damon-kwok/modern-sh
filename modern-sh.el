@@ -374,11 +374,15 @@ Optional argument BUILD If the tags file does not exist, execute the build."
 (defun modern-sh-after-save-hook ()
   "After save hook."
   (when (eq major-mode 'sh-mode)
-    (indent-region (point-min)
-      (point-max))
+    (modern-sh-format-buffer)
     (if (not (executable-find "ctags"))
       (message "Could not locate executable '%s'" "ctags")
       (modern-sh-build-tags))))
+
+(defun modern-sh-format-buffer ()
+  "Format current buffer."
+  (indent-region (point-min)
+    (point-max)))
 
 ;;;###autoload
 (define-minor-mode modern-sh-mode ;;
@@ -403,13 +407,17 @@ Optional argument BUILD If the tags file does not exist, execute the build."
     (progn                              ;
       (modern-sh-add-keywords)
       (imenu-add-to-menubar "Index")
+      (substitute-key-definition #'sh-for nil sh-mode-map)
+      (define-key sh-mode-map (kbd "C-x C-f") #'modern-sh-format-buffer)
       (define-key sh-mode-map (kbd "C-x C-e") #'eir-eval-in-shell)
       (add-hook 'after-save-hook #'modern-sh-after-save-hook nil t)
       (modern-sh-load-tags))
     (progn                              ;
       (modern-sh-remove-keywords)
       (imenu--cleanup)
+      (substitute-key-definition #'modern-sh-format-buffer nil sh-mode-map)
       (substitute-key-definition #'eir-eval-in-shell nil sh-mode-map)
+      (define-key sh-mode-map (kbd "C-x C-f") #'sh-for)
       (remove-hook 'after-save-hook #'modern-sh-after-save-hook)))
   ;;
   (font-lock-flush))
