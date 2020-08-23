@@ -39,6 +39,7 @@
 ;;; Code:
 
 (require 'cl-lib)
+(require 'sh-script)
 (require 'xref)
 (require 'hydra)
 (require 'imenu)
