@@ -234,7 +234,7 @@
   "Return t if directory `PATH' is the root of the Modern shell project."
   (let* ((files '("CMakeLists.txt" "make.bat" "Makefile"     ;
                    "Dockerfile" ".editorconfig" ".gitignore" ;
-                   ".git" ".svn" ".hg"))
+                   ".git" ".svn" ".hg" ".bzr"))
           (foundp nil))
     (while (and (> (length files) 0)
              (not foundp))
