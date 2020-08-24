@@ -233,9 +233,9 @@
 
 (defun modern-sh-project-root-p (path)
   "Return t if directory `PATH' is the root of the Modern shell project."
-  (let* ((files '("CMakeLists.txt" "make.bat" "Makefile"     ;
+  (let* ((files '( ".projectile" ".git" ".svn" ".hg" ".bzr"  ;
                    "Dockerfile" ".editorconfig" ".gitignore" ;
-                   ".git" ".svn" ".hg" ".bzr"))
+                   "Makefile" "CMakeLists.txt" "make.bat"))
           (foundp nil))
     (while (and (> (length files) 0)
              (not foundp))
