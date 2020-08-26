@@ -253,11 +253,14 @@ Optional argument PATH: project path."
   (let* ((bufdir (if buffer-file-name   ;
                    (file-name-directory buffer-file-name) default-directory))
           (curdir (if path (file-name-as-directory path) bufdir))
-          (parent (file-name-directory (directory-file-name curdir))))
+          (parent (file-name-directory (directory-file-name curdir)))
+          (parent-basename (file-name-base (directory-file-name parent))))
     (if (or (not parent)
+          (string= parent "/")
           (string= parent curdir)
           (string= parent (file-name-as-directory (getenv "HOME")))
-          (string= parent "/")
+          (and (>= (length parent-basename) 10)
+                 (string= (substring parent-basename 0 10) "smb-share:"))
           (modern-sh-project-root-p curdir)) ;
       curdir                                 ;
       (modern-sh-project-root parent))))
