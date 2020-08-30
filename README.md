@@ -2,7 +2,7 @@
 [![GitHub license](https://img.shields.io/github/license/damon-kwok/modern-sh?logo=gnu&.svg)](https://github.com/damon-kwok/modern-sh/blob/master/COPYING)
 [![Sponsor](https://img.shields.io/badge/Support%20Me-%F0%9F%92%97-ff69b4.svg)](https://www.patreon.com/DamonKwok)
 [![MELPA](http://melpa.org/packages/modern-sh-badge.svg)](http://melpa.org/#/modern-sh)
-[![MELPA Stable](http://stable.melpa.org/packages/modern-sh-badge.svg)](http://stable.melpa.org/#/modern-sh)
+<!-- [![MELPA Stable](http://stable.melpa.org/packages/modern-sh-badge.svg)](http://stable.melpa.org/#/modern-sh) -->
 
 # Modern sh
 
