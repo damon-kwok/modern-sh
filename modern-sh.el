@@ -412,7 +412,7 @@ Optional argument BUILD If the tags file does not exist, execute the build."
       (modern-sh-add-keywords)
       (imenu-add-to-menubar "Index")
       (substitute-key-definition #'sh-for nil sh-mode-map)
-      (define-key sh-mode-map (kbd "C-x C-f") #'modern-sh-format-buffer)
+      (define-key sh-mode-map (kbd "C-c C-f") #'modern-sh-format-buffer)
       (define-key sh-mode-map (kbd "C-x C-e") #'eir-eval-in-shell)
       (add-hook 'after-save-hook #'modern-sh-after-save-hook nil t)
       (modern-sh-load-tags))
@@ -421,7 +421,7 @@ Optional argument BUILD If the tags file does not exist, execute the build."
       (imenu--cleanup)
       (substitute-key-definition #'modern-sh-format-buffer nil sh-mode-map)
       (substitute-key-definition #'eir-eval-in-shell nil sh-mode-map)
-      (define-key sh-mode-map (kbd "C-x C-f") #'sh-for)
+      (define-key sh-mode-map (kbd "C-c C-f") #'sh-for)
       (remove-hook 'after-save-hook #'modern-sh-after-save-hook)))
   ;;
   (font-lock-flush))
