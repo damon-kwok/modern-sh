@@ -154,6 +154,8 @@
      (,modern-sh-keywords-regexp . font-lock-keyword-face)
 
      ;; variable define
+     ("\\(:-\\|:\\+\\)" 1 'font-lock-builtin-face)
+     ("\\(:-\\|:\\+\\)\\([A-Za-z_][A-Za-z0-9_]*\\)" 2 'font-lock-variable-name-face)
      ("\\([A-Za-z_][A-Za-z0-9_]*\\)[ \t]*[=[]" 1 'font-lock-variable-name-face)
 
      ;; builtin
