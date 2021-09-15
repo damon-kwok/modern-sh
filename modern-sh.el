@@ -113,6 +113,10 @@
 
 (defconst modern-sh-font-lock-keywords
   `(
+     ;; ipv4 & ipv6
+     ("\\([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\\)" 1 'font-lock-constant-face)
+     ("\\([A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+\\)" 1 'font-lock-constant-face)
+
      ;; source
      ("^[ \t]*\\(\\.\\)[ \t\n]" 1 'font-lock-warning-face)
 
@@ -121,7 +125,7 @@
 
      ;; env variable
      ("[$>&]+\\([A-Za-z0-9_#@-]+\\)" . 'font-lock-warning-face)
-     ("[@^]+\\([A-Za-z0-9_]+\\)" 1 'font-lock-keyword-face)
+     ("[@^]+\\([A-Za-z][A-Za-z0-9_]+\\)" 1 'font-lock-keyword-face)
      ("${\\([A-Za-z0-9_#@-]+\\)" 1 'font-lock-warning-face)
 
      ;; case options
