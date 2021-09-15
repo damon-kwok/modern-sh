@@ -121,6 +121,7 @@
 
      ;; env variable
      ("[$>&]+\\([A-Za-z0-9_#@-]+\\)" . 'font-lock-warning-face)
+     ("[@^]+\\([A-Za-z0-9_]+\\)" 1 'font-lock-keyword-face)
      ("${\\([A-Za-z0-9_#@-]+\\)" 1 'font-lock-warning-face)
 
      ;; case options
