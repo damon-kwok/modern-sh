@@ -61,14 +61,14 @@
   "Modern shell declaration keywords.")
 
 (defconst modern-sh-preprocessor-keywords
-  '("source" "eval"                      ;
-     "emacs" "em" "vi" "vim" "nano" "ed" ;
+  '("emacs" "em" "vi" "vim" "nano" "ed" ;
      "sh" "bash" "zsh" "csh" "ksh" "fish" "pwsh")
   "Modern shell preprocessor keywords.")
 
 (defconst modern-sh-careful-keywords
   '("return" "break" "continue"         ;
-     "export" "readonly" "alias" "unset" "shift")
+     "source" "eval" "export"           ;
+     "readonly" "alias" "unset" "shift")
   "Modern shell language careful keywords.")
 
 (defconst modern-sh-builtin-keywords
