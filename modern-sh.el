@@ -124,11 +124,6 @@
 
 (defconst modern-sh-font-lock-keywords
   `(
-     ;; ipv4 & ipv6
-     ("\\([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\\)" 1 'font-lock-constant-face)
-     ("\\([A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+\\)"
-       1 'font-lock-constant-face)
-
      ;; source
      ("^[ \t]*\\(\\.\\)[ \t\n]" 1 'font-lock-warning-face)
 
@@ -167,6 +162,10 @@
      ("[:]*/\\([A-Za-z0-9_.-]*\\)" 1 'font-lock-negation-char-face)
      ("\\([A-Za-z0-9_.-]*\\)[:]*/" 1 'font-lock-negation-char-face)
 
+     ;; ipv4 & ipv6
+     ("\\([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\\)" 1 'font-lock-constant-face)
+     ("\\([A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+:[A-Za-z0-9]+\\)"
+       1 'font-lock-constant-face)
      ;; keyword
      (,modern-sh-keywords-regexp . font-lock-keyword-face)
 
