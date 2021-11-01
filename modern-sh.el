@@ -405,6 +405,7 @@ Optional argument BUILD If the tags file does not exist, execute the build."
 
 (defun modern-sh-format-buffer ()
   "Format current buffer."
+  (interactive)
   (indent-region (point-min)
     (point-max)))
 
