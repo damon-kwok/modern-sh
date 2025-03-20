@@ -67,7 +67,7 @@
 
 (defconst modern-sh-careful-keywords
   '("return" "break" "continue"         ;
-     "source" "eval" "export"           ;
+     "source" "eval" "export" "EOF"     ;
      "readonly" "alias" "unset" "shift")
   "Modern shell language careful keywords.")
 
